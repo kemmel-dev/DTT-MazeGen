@@ -366,8 +366,9 @@ GameObject:
   m_Component:
   - component: {fileID: 442572099}
   - component: {fileID: 442572100}
+  - component: {fileID: 442572101}
   m_Layer: 0
-  m_Name: MazeGen
+  m_Name: Maze Generation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,8 +401,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a12fe86ad14864b0a2f5632ffd477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mazeSize: {x: 5, y: 5}
+  _mazeSize: {x: 10, y: 10}
   _algorithm: 0
+--- !u!114 &442572101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442572098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac4776dbaa4425fa4e22e2833942658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
