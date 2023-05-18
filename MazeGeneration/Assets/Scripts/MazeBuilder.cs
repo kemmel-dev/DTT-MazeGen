@@ -4,9 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(MazeGenerator))]
 public class MazeBuilder : MonoBehaviour
 {
-    [Tooltip("Size of the maze. (Minimum 2x2).")]
-    public Vector2Int MazeSize;
-
+    private MazeConfig _mazeConfig;
     private MazeGenerator _mazeGenerator;
 
     private MazeGenerator MazeGenerator
@@ -28,7 +26,12 @@ public class MazeBuilder : MonoBehaviour
     private Transform _mazeParent;
 
     private Wall[] _walls = Array.Empty<Wall>();
-    
+
+    private void Awake()
+    {
+        _mazeConfig = GetComponent<MazeConfig>();
+    }
+
     private void RefreshParent()
     {
         if (_mazeParent == null)
@@ -53,24 +56,24 @@ public class MazeBuilder : MonoBehaviour
 
     public void BuildMaze()
     {
-        BuildMaze(MazeSize);
+        BuildMaze(_mazeConfig.Size);
     }
 
     private void BuildMaze(Vector2Int vector2Int)
     {
         RefreshParent();
         BuildOuterWalls();
-        BuildInnerWalls(MazeGenerator.Generate(MazeSize));
+        BuildInnerWalls(MazeGenerator.Generate(_mazeConfig.Size));
     }
 
     private void BuildOuterWalls()
     {
         var outerWalls = new Wall[]
         {
-            new Wall(new Vector2Int(0, 0), new Vector2Int(MazeSize.x, 0), true),
-            new Wall(new Vector2Int(0, MazeSize.y), new Vector2Int(MazeSize.x, MazeSize.y), true),
-            new Wall(new Vector2Int(0, 0), new Vector2Int(0, MazeSize.y), false),
-            new Wall(new Vector2Int(MazeSize.x, 0), new Vector2Int(MazeSize.x, MazeSize.y), false),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(_mazeConfig.Size.x, 0), true),
+            new Wall(new Vector2Int(0, _mazeConfig.Size.y), new Vector2Int(_mazeConfig.Size.x, _mazeConfig.Size.y), true),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(0, _mazeConfig.Size.y), false),
+            new Wall(new Vector2Int(_mazeConfig.Size.x, 0), new Vector2Int(_mazeConfig.Size.x, _mazeConfig.Size.y), false),
         };
         foreach (var outerWall in outerWalls)
         {

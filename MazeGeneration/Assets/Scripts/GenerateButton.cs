@@ -29,7 +29,7 @@ public class GenerateButton : MonoBehaviour
     {
         if (!ValidInput) return;
         
-        _mazeBuilder.MazeSize = new Vector2Int(X, Y);
+        _mazeBuilder.GetComponent<MazeConfig>().Size = new Vector2Int(X, Y);
         _mazeBuilder.BuildMaze();
     }
 
