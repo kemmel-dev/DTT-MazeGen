@@ -15,7 +15,7 @@ namespace Editor
                 var mazeBuilder = (MazeBuilder)target;
                 var mazeGenerator = mazeBuilder.GetComponent<MazeGenerator>();
                 
-                mazeBuilder.BuildMaze(mazeGenerator.Generate(), mazeGenerator.MazeSize);
+                mazeBuilder.BuildMaze(mazeGenerator.Generate(mazeBuilder.MazeSize));
             }
         }
     }

@@ -1,9 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(MazeGenerator))]
 public class MazeBuilder : MonoBehaviour
 {
-
+    [Tooltip("Size of the maze. (Minimum 2x2).")]
+    public Vector2Int MazeSize;
+    
     [SerializeField] private float _wallHeight = 1;
     [SerializeField] private float _wallThickness = .25f;
     [SerializeField] private GameObject _innerWallPrefab;
@@ -35,22 +38,22 @@ public class MazeBuilder : MonoBehaviour
         _mazeParent.parent = transform;
     }
 
-    public void BuildMaze(Wall[] walls, Vector2Int mazeSize)
+    public void BuildMaze(Wall[] walls)
     {
         _walls = walls;
         RefreshParent();
         BuildInnerWalls(walls);
-        BuildOuterWalls(mazeSize);
+        BuildOuterWalls();
     }
 
-    private void BuildOuterWalls(Vector2Int mazeSize)
+    private void BuildOuterWalls()
     {
         var outerWalls = new Wall[]
         {
-            new Wall(new Vector2Int(0, 0), new Vector2Int(mazeSize.x, 0), true),
-            new Wall(new Vector2Int(0, mazeSize.y), new Vector2Int(mazeSize.x, mazeSize.y), true),
-            new Wall(new Vector2Int(0, 0), new Vector2Int(0, mazeSize.y), false),
-            new Wall(new Vector2Int(mazeSize.x, 0), new Vector2Int(mazeSize.x, mazeSize.y), false),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(MazeSize.x, 0), true),
+            new Wall(new Vector2Int(0, MazeSize.y), new Vector2Int(MazeSize.x, MazeSize.y), true),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(0, MazeSize.y), false),
+            new Wall(new Vector2Int(MazeSize.x, 0), new Vector2Int(MazeSize.x, MazeSize.y), false),
         };
         foreach (var outerWall in outerWalls)
         {
