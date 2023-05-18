@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    [SerializeField] private Vector2Int _mazeSize;
+    public Vector2Int MazeSize;
 
     private RecursiveDivisionAlgorithm _recursiveDivisionAlgorithm;
 
@@ -16,7 +16,7 @@ public class MazeGenerator : MonoBehaviour
         {
             GenerationAlgorithm.RecursiveDivision => new RecursiveDivisionAlgorithm(),
             _ => throw new ArgumentOutOfRangeException()
-        }).GenerateWalls(_mazeSize);
+        }).GenerateWalls(MazeSize);
     }
     
 
