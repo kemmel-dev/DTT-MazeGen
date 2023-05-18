@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(CameraScale))]
+    [CustomEditor(typeof(CameraScaler))]
     public class CameraScaleEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
@@ -12,7 +12,7 @@ namespace Editor
 
             if (GUILayout.Button("Rescale"))
             {
-                var cameraScale = (CameraScale)target;
+                var cameraScale = (CameraScaler)target;
                 cameraScale.Rescale();
             }
         }

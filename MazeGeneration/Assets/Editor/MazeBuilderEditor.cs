@@ -9,10 +9,10 @@ namespace Editor
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            var mazeBuilder = (MazeBuilder)target;
 
             if (GUILayout.Button("Build maze"))
             {
-                var mazeBuilder = (MazeBuilder)target;
                 mazeBuilder.BuildMaze();
             }
         }

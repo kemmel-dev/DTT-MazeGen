@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraScale : MonoBehaviour
+public class CameraScaler : MonoBehaviour
 {
     [SerializeField] private float _minScaleVertical;
     [SerializeField] private float _maxScaleVertical;
@@ -18,7 +18,7 @@ public class CameraScale : MonoBehaviour
         get
         {
             if (_camera != null) return _camera;
-            _camera = GetComponent<Camera>();
+            _camera = Camera.main;
             return _camera;
 
         }
