@@ -6,6 +6,17 @@ public class MazeBuilder : MonoBehaviour
 {
     private MazeConfig _mazeConfig;
     private MazeGenerator _mazeGenerator;
+    
+    private MazeConfig MazeConfig
+    {
+        get
+        {
+            if (_mazeConfig != null) return _mazeConfig;
+            _mazeConfig = GetComponent<MazeConfig>();
+            return _mazeConfig;
+
+        }
+    }
 
     private MazeGenerator MazeGenerator
     {
@@ -56,7 +67,7 @@ public class MazeBuilder : MonoBehaviour
 
     public void BuildMaze()
     {
-        BuildMaze(_mazeConfig.Size);
+        BuildMaze(MazeConfig.Size);
     }
 
     private void BuildMaze(Vector2Int vector2Int)
@@ -71,9 +82,9 @@ public class MazeBuilder : MonoBehaviour
         var outerWalls = new Wall[]
         {
             new Wall(new Vector2Int(0, 0), new Vector2Int(_mazeConfig.Size.x, 0), true),
-            new Wall(new Vector2Int(0, _mazeConfig.Size.y), new Vector2Int(_mazeConfig.Size.x, _mazeConfig.Size.y), true),
+            new Wall(new Vector2Int(0, MazeConfig.Size.y), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), true),
             new Wall(new Vector2Int(0, 0), new Vector2Int(0, _mazeConfig.Size.y), false),
-            new Wall(new Vector2Int(_mazeConfig.Size.x, 0), new Vector2Int(_mazeConfig.Size.x, _mazeConfig.Size.y), false),
+            new Wall(new Vector2Int(MazeConfig.Size.x, 0), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), false),
         };
         foreach (var outerWall in outerWalls)
         {
