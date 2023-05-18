@@ -6,6 +6,19 @@ public class MazeBuilder : MonoBehaviour
 {
     [Tooltip("Size of the maze. (Minimum 2x2).")]
     public Vector2Int MazeSize;
+
+    private MazeGenerator _mazeGenerator;
+
+    private MazeGenerator MazeGenerator
+    {
+        get
+        {
+            if (_mazeGenerator != null) return _mazeGenerator;
+            _mazeGenerator = GetComponent<MazeGenerator>();
+            return _mazeGenerator;
+
+        }
+    }
     
     [SerializeField] private float _wallHeight = 1;
     [SerializeField] private float _wallThickness = .25f;
@@ -38,12 +51,16 @@ public class MazeBuilder : MonoBehaviour
         _mazeParent.parent = transform;
     }
 
-    public void BuildMaze(Wall[] walls)
+    public void BuildMaze()
     {
-        _walls = walls;
+        BuildMaze(MazeSize);
+    }
+
+    private void BuildMaze(Vector2Int vector2Int)
+    {
         RefreshParent();
-        BuildInnerWalls(walls);
         BuildOuterWalls();
+        BuildInnerWalls(MazeGenerator.Generate(MazeSize));
     }
 
     private void BuildOuterWalls()

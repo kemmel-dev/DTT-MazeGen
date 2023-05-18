@@ -16,6 +16,4 @@ public class MazeGenerator : MonoBehaviour
             _ => throw new ArgumentOutOfRangeException()
         }).GenerateWalls(mazeSize);
     }
-    
-
 }

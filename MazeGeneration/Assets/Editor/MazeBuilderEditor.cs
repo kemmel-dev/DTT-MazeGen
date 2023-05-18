@@ -13,9 +13,7 @@ namespace Editor
             if (GUILayout.Button("Build maze"))
             {
                 var mazeBuilder = (MazeBuilder)target;
-                var mazeGenerator = mazeBuilder.GetComponent<MazeGenerator>();
-                
-                mazeBuilder.BuildMaze(mazeGenerator.Generate(mazeBuilder.MazeSize));
+                mazeBuilder.BuildMaze();
             }
         }
     }
