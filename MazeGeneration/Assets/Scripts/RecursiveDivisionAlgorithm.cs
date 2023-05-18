@@ -28,9 +28,9 @@ public class RecursiveDivisionAlgorithm : IMazeGenerationAlgorithm
             var gapX = Random.Range(startX, endX);
             
             // Add wall from region start to gap start
-            _wallList.Add(new Wall(new Vector2Int(startX, y), new Vector2Int(gapX, y)));
+            AddWall(new Wall(new Vector2Int(startX, y), new Vector2Int(gapX, y), true));
             // Add wall from gap end to region end
-            _wallList.Add(new Wall(new Vector2Int(gapX + 1, y), new Vector2Int(endX, y)));
+            AddWall(new Wall(new Vector2Int(gapX + 1, y), new Vector2Int(endX, y), true));
             
             // Divide upper section
             DivideMaze(startX, startY, endX, y);
@@ -43,14 +43,22 @@ public class RecursiveDivisionAlgorithm : IMazeGenerationAlgorithm
             var gapY = Random.Range(startY, endY);
 
             // Add wall from region start to gap start
-            _wallList.Add(new Wall(new Vector2Int(x, startY), new Vector2Int(x, gapY)));
+            AddWall(new Wall(new Vector2Int(x, startY), new Vector2Int(x, gapY), false));
             // Add wall from gap end to region end
-            _wallList.Add(new Wall(new Vector2Int(x, gapY + 1), new Vector2Int(x, endY)));
+            AddWall(new Wall(new Vector2Int(x, gapY + 1), new Vector2Int(x, endY), false));
             
             // Divide left section
             DivideMaze(startX, startY, x, endY); 
             // Divide right section
             DivideMaze(x, startY, endX, endY);
+        }
+    }
+
+    private void AddWall(Wall wall)
+    {
+        if (wall.Length > 0)
+        {
+            _wallList.Add(wall);
         }
     }
 }
