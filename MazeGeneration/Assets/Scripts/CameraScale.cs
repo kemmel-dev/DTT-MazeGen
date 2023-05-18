@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class CameraScale : MonoBehaviour
 {
-    [SerializeField] private float _minScale;
-    [SerializeField] private float _maxScale;
-    private float ScaleDelta => _maxScale - _minScale;
+    [SerializeField] private float _minScaleVertical;
+    [SerializeField] private float _maxScaleVertical;
+    [SerializeField] private float _minScaleHorizontal = 3;
+    [SerializeField] private float _maxScaleHorizontal = 72;
+    private float ScaleDeltaVertical => _maxScaleVertical - _minScaleVertical;
+    private float ScaleDeltaHorizontal => _maxScaleHorizontal - _minScaleHorizontal;
 
     [SerializeField] private MazeConfig _mazeConfig;
 
@@ -24,13 +27,17 @@ public class CameraScale : MonoBehaviour
     public void Rescale()
     {
         var scale = Scale;
-        var size = _minScale + ScaleDelta * scale.sizePercentage;
+        
+        var size = scale.horizontalBias
+            ? _minScaleHorizontal + ScaleDeltaHorizontal * scale.sizePercentage
+            : _minScaleVertical + ScaleDeltaVertical * scale.sizePercentage;
         Camera.orthographicSize = size;
 
         var cameraTransform = Camera.transform;
         cameraTransform.position = new Vector3(_mazeConfig.Size.x / 2f, cameraTransform.position.y, _mazeConfig.Size.y / 2f);
     }
-    
+
+
     private (bool horizontalBias, float sizePercentage) Scale
     {
         get
