@@ -29,8 +29,9 @@ public class GenerateButton : MonoBehaviour
     {
         if (!ValidInput) return;
         
-        _mazeBuilder.GetComponent<MazeConfig>().Size = new Vector2Int(X, Y);
-        _mazeBuilder.BuildMaze();
+        var mazeConfig = _mazeBuilder.GetComponent<MazeConfig>();
+        mazeConfig.Size = new Vector2Int(X, Y);
+        _mazeBuilder.BuildMaze(mazeConfig.StepTime == 0);
     }
 
     public bool ValidInput => X > 0 && Y > 0;

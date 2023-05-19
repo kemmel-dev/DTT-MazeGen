@@ -13,7 +13,7 @@ namespace Editor
 
             if (GUILayout.Button("Build maze"))
             {
-                mazeBuilder.BuildMaze();
+                mazeBuilder.BuildMaze(true);
             }
         }
     }

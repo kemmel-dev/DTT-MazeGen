@@ -60,22 +60,30 @@ public class MazeBuilder : MonoBehaviour
         _mazeParent.parent = transform;
     }
 
-    public void BuildMaze()
+    public void BuildMaze(bool instant)
     {
-        BuildMaze(MazeConfig.Size);
+        BuildMaze(MazeConfig.Size, instant);
     }
 
-    private void BuildMaze(Vector2Int vector2Int)
+    private void BuildMaze(Vector2Int vector2Int, bool instant)
     {
         RefreshParent();
 
         _mazeBuilder = new MazeBuilderMesh(_mazeParent, MazeConfig);
         _mazeBuilder.BuildOuterWalls();
-        
+
         if (_buildRoutine != null)
             StopCoroutine(_buildRoutine);
+        
         _walls = MazeGenerator.Generate(vector2Int);
-        _buildRoutine = StartCoroutine(_mazeBuilder.BuildInnerWallsRoutine(_walls));
+        if (instant)
+        {
+            _mazeBuilder.BuildInnerWalls(_walls);
+        }
+        else
+        {
+            _buildRoutine = StartCoroutine(_mazeBuilder.BuildInnerWallsRoutine(_walls));
+        }
     }
     
     private void OnDrawGizmos()
