@@ -7,7 +7,6 @@ public class MazeBuilder : MonoBehaviour
     private Wall[] _walls = Array.Empty<Wall>();
     private Transform _mazeParent;
     private Coroutine _buildRoutine;
-
     private IMazeBuilder _mazeBuilder;
     
     // Access these components only through their properties, so they work from EditMode.
@@ -75,7 +74,8 @@ public class MazeBuilder : MonoBehaviour
         
         if (_buildRoutine != null)
             StopCoroutine(_buildRoutine);
-        _buildRoutine = StartCoroutine(_mazeBuilder.BuildInnerWallsRoutine(MazeGenerator.Generate(vector2Int)));
+        _walls = MazeGenerator.Generate(vector2Int);
+        _buildRoutine = StartCoroutine(_mazeBuilder.BuildInnerWallsRoutine(_walls));
     }
     
     private void OnDrawGizmos()
