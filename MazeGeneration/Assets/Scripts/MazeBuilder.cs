@@ -1,46 +1,47 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MazeGenerator))]
 public class MazeBuilder : MonoBehaviour
 {
-    private MazeConfig _mazeConfig;
-    private MazeGenerator _mazeGenerator;
+    [SerializeField] private float _wallHeight = 1;
+    [SerializeField] private float _wallThickness = .25f;
+    [SerializeField] private GameObject _innerWallPrefab;
+    [SerializeField] private GameObject _outerWallPrefab;
+
+    private Wall[] _walls = Array.Empty<Wall>();
+    private Transform _mazeParent;
+    private Coroutine _buildRoutine;
+    
+    // Access these components only through their properties, so they work from EditMode.
+    private MazeConfig _mazeConfigBackingField;
+    private MazeGenerator _mazeGeneratorBackingField;
     
     private MazeConfig MazeConfig
     {
         get
         {
-            if (_mazeConfig != null) return _mazeConfig;
-            _mazeConfig = GetComponent<MazeConfig>();
-            return _mazeConfig;
+            if (_mazeConfigBackingField != null) return _mazeConfigBackingField;
+            _mazeConfigBackingField = GetComponent<MazeConfig>();
+            return _mazeConfigBackingField;
 
         }
     }
-
     private MazeGenerator MazeGenerator
     {
         get
         {
-            if (_mazeGenerator != null) return _mazeGenerator;
-            _mazeGenerator = GetComponent<MazeGenerator>();
-            return _mazeGenerator;
+            if (_mazeGeneratorBackingField != null) return _mazeGeneratorBackingField;
+            _mazeGeneratorBackingField = GetComponent<MazeGenerator>();
+            return _mazeGeneratorBackingField;
 
         }
     }
-    
-    [SerializeField] private float _wallHeight = 1;
-    [SerializeField] private float _wallThickness = .25f;
-    [SerializeField] private GameObject _innerWallPrefab;
-    [SerializeField] private GameObject _outerWallPrefab;
-    
-    private Transform _mazeParent;
-
-    private Wall[] _walls = Array.Empty<Wall>();
 
     private void Awake()
     {
-        _mazeConfig = GetComponent<MazeConfig>();
+        _mazeConfigBackingField = GetComponent<MazeConfig>();
     }
 
     private void RefreshParent()
@@ -74,21 +75,36 @@ public class MazeBuilder : MonoBehaviour
     {
         RefreshParent();
         BuildOuterWalls();
-        BuildInnerWalls(MazeGenerator.Generate(_mazeConfig.Size));
+        
+        if (_buildRoutine != null)
+            StopCoroutine(_buildRoutine);
+        _buildRoutine = StartCoroutine(BuildInnerWallsRoutine(MazeGenerator.Generate(vector2Int)));
     }
 
     private void BuildOuterWalls()
     {
         var outerWalls = new Wall[]
         {
-            new Wall(new Vector2Int(0, 0), new Vector2Int(_mazeConfig.Size.x, 0), true),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(MazeConfig.Size.x, 0), true),
             new Wall(new Vector2Int(0, MazeConfig.Size.y), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), true),
-            new Wall(new Vector2Int(0, 0), new Vector2Int(0, _mazeConfig.Size.y), false),
+            new Wall(new Vector2Int(0, 0), new Vector2Int(0, MazeConfig.Size.y), false),
             new Wall(new Vector2Int(MazeConfig.Size.x, 0), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), false),
         };
         foreach (var outerWall in outerWalls)
         {
             BuildWall(outerWall, _outerWallPrefab);
+        }
+    }
+
+    private IEnumerator BuildInnerWallsRoutine(Wall[] walls)
+    {
+        if (walls == null)
+            throw new NullReferenceException("The walls array provided to the builder was empty or null.");
+
+        foreach (var wall in walls)
+        {
+            BuildWall(wall, _innerWallPrefab);
+            yield return new WaitForSeconds(_mazeConfigBackingField.StepTime);
         }
     }
 
