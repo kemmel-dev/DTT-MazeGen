@@ -18,7 +18,7 @@ public class PanAndZoomCameraController : MonoBehaviour
     {
         _camera.orthographicSize += - Input.mouseScrollDelta.y * _zoomSensitivity;
         
-        if (!Input.GetMouseButton(0)) return;
+        if (!Input.GetMouseButton(1)) return;
         
         var thisTransform = transform;
         var currentPos = thisTransform.position;
