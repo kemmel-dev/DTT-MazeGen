@@ -11,4 +11,6 @@ public class MazeConfig : MonoBehaviour
     public Vector2Int SizeMin;
     [Tooltip("Maximum size of the maze.")]
     public Vector2Int SizeMax;
+    [Tooltip("Padding around the edges of the maze.")]
+    public float Padding;
 }
