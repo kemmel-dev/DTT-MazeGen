@@ -69,7 +69,7 @@ public class MazeBuilder : MonoBehaviour
     {
         RefreshParent();
 
-        _mazeBuilder = new MazeBuilderMesh(_mazeParent, MazeConfig);
+        _mazeBuilder = new MazeBuilderLines(_mazeParent, MazeConfig);
         _mazeBuilder.BuildOuterWalls();
 
         if (_buildRoutine != null)

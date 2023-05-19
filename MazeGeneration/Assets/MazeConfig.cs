@@ -23,4 +23,9 @@ public class MazeConfig : MonoBehaviour
     public GameObject InnerWallPrefab;
     [Tooltip("Prefab used for 3D outer walls.")]
     public GameObject OuterWallPrefab;
+
+    [Tooltip("Material used for lines to draw inner walls in 2d view")]
+    public Material InnerWallLineMaterial;
+    [Tooltip("Material used for lines to draw outer walls in 2d view")]
+    public Material OuterWallLineMaterial;
 }
