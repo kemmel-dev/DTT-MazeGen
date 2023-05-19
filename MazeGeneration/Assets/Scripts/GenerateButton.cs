@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GenerateButton : MonoBehaviour
 {
 
+    [SerializeField] private Slider _stepTimeSlider;
     [SerializeField] private Button _button;
     [SerializeField] private TextMeshProUGUI _buttonText;
-    
 
     [SerializeField] private MazeBuilder _mazeBuilder;
 
@@ -30,6 +30,7 @@ public class GenerateButton : MonoBehaviour
         if (!ValidInput) return;
         
         var mazeConfig = _mazeBuilder.GetComponent<MazeConfig>();
+        mazeConfig.StepTime = _stepTimeSlider.value;
         mazeConfig.Size = new Vector2Int(X, Y);
         _mazeBuilder.BuildMaze(mazeConfig.StepTime == 0);
     }

@@ -42862,6 +42862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0505d100024f47b33817ac41828673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stepTimeSlider: {fileID: 2063725849}
   _button: {fileID: 717965770}
   _buttonText: {fileID: 838822736}
   _mazeBuilder: {fileID: 1050708175}
