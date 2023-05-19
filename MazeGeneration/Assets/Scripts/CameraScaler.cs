@@ -2,57 +2,19 @@ using UnityEngine;
 
 public class CameraScaler : MonoBehaviour
 {
-    [SerializeField] private float _minScaleVertical;
-    [SerializeField] private float _maxScaleVertical;
-    [SerializeField] private float _minScaleHorizontal = 3;
-    [SerializeField] private float _maxScaleHorizontal = 72;
-    private float ScaleDeltaVertical => _maxScaleVertical - _minScaleVertical;
-    private float ScaleDeltaHorizontal => _maxScaleHorizontal - _minScaleHorizontal;
-
+    [SerializeField] private Camera _mainCamera;
     [SerializeField] private MazeConfig _mazeConfig;
 
-    private Camera _camera;
-    
-    private Camera Camera
+    public void Rescale() 
     {
-        get
-        {
-            if (_camera != null) return _camera;
-            _camera = Camera.main;
-            return _camera;
-
-        }
-    }
-
-    public void Rescale()
-    {
-        var scale = Scale;
+        var cameraTransform = _mainCamera.transform;
         
-        var size = scale.horizontalBias
-            ? _minScaleHorizontal + ScaleDeltaHorizontal * scale.sizePercentage
-            : _minScaleVertical + ScaleDeltaVertical * scale.sizePercentage;
-        Camera.orthographicSize = size;
-
-        var cameraTransform = Camera.transform;
-        cameraTransform.position = new Vector3(_mazeConfig.Size.x / 2f, cameraTransform.position.y, _mazeConfig.Size.y / 2f);
-    }
-
-
-    private (bool horizontalBias, float sizePercentage) Scale
-    {
-        get
-        {
-            var horizontalBias = _mazeConfig.Size.x >= _mazeConfig.Size.y;
-
-            return horizontalBias ? 
-                (true, SizePercentageOf(_mazeConfig.Size.x, _mazeConfig.SizeMin.x, _mazeConfig.SizeMax.x)) 
-                : (false, SizePercentageOf(_mazeConfig.Size.y, _mazeConfig.SizeMin.y, _mazeConfig.SizeMax.y));
-        }
-    }
-
-    private static float SizePercentageOf(float size, float sizeMin, float sizeMax)
-    {
-        var delta = sizeMax - sizeMin;
-        return (size - sizeMin) / delta;
+        // Set position to center of the maze.
+        var targetPos = new Vector3(_mazeConfig.Size.x / 2f, cameraTransform.position.y, _mazeConfig.Size.y / 2f);
+        cameraTransform.position = targetPos;
+        
+        // Set orthographic size to the largest size parameter, taking the horizontal aspect ratio into account.
+        var largestSize = Mathf.Max(_mazeConfig.Size.x / _mainCamera.aspect, _mazeConfig.Size.y);
+        _mainCamera.orthographicSize = (largestSize + _mazeConfig.Padding) / 2f;
     }
 }
