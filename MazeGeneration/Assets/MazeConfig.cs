@@ -15,4 +15,12 @@ public class MazeConfig : MonoBehaviour
     public float StepTime;
     [Tooltip("Padding around the edges of the maze.")]
     public float Padding;
+    [Tooltip("Thickness of maze walls.")] 
+    public float WallThickness;
+    [Tooltip("Height of maze walls (only used in 3d).")]
+    public float WallHeight;
+    [Tooltip("Prefab used for 3D inner walls.")]
+    public GameObject InnerWallPrefab;
+    [Tooltip("Prefab used for 3D outer walls.")]
+    public GameObject OuterWallPrefab;
 }

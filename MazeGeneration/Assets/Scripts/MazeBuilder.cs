@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MazeGenerator))]
 public class MazeBuilder : MonoBehaviour
 {
-    [SerializeField] private float _wallHeight = 1;
-    [SerializeField] private float _wallThickness = .25f;
-    [SerializeField] private GameObject _innerWallPrefab;
-    [SerializeField] private GameObject _outerWallPrefab;
-
     private Wall[] _walls = Array.Empty<Wall>();
     private Transform _mazeParent;
     private Coroutine _buildRoutine;
+
+    private IMazeBuilder _mazeBuilder;
     
     // Access these components only through their properties, so they work from EditMode.
     private MazeConfig _mazeConfigBackingField;
     private MazeGenerator _mazeGeneratorBackingField;
-    
     private MazeConfig MazeConfig
     {
         get
@@ -38,7 +33,7 @@ public class MazeBuilder : MonoBehaviour
 
         }
     }
-
+    
     private void Awake()
     {
         _mazeConfigBackingField = GetComponent<MazeConfig>();
@@ -74,56 +69,13 @@ public class MazeBuilder : MonoBehaviour
     private void BuildMaze(Vector2Int vector2Int)
     {
         RefreshParent();
-        BuildOuterWalls();
+
+        _mazeBuilder = new MazeBuilderMesh(_mazeParent, MazeConfig);
+        _mazeBuilder.BuildOuterWalls();
         
         if (_buildRoutine != null)
             StopCoroutine(_buildRoutine);
-        _buildRoutine = StartCoroutine(BuildInnerWallsRoutine(MazeGenerator.Generate(vector2Int)));
-    }
-
-    private void BuildOuterWalls()
-    {
-        var outerWalls = new Wall[]
-        {
-            new Wall(new Vector2Int(0, 0), new Vector2Int(MazeConfig.Size.x, 0), true),
-            new Wall(new Vector2Int(0, MazeConfig.Size.y), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), true),
-            new Wall(new Vector2Int(0, 0), new Vector2Int(0, MazeConfig.Size.y), false),
-            new Wall(new Vector2Int(MazeConfig.Size.x, 0), new Vector2Int(MazeConfig.Size.x, MazeConfig.Size.y), false),
-        };
-        foreach (var outerWall in outerWalls)
-        {
-            BuildWall(outerWall, _outerWallPrefab);
-        }
-    }
-
-    private IEnumerator BuildInnerWallsRoutine(Wall[] walls)
-    {
-        if (walls == null)
-            throw new NullReferenceException("The walls array provided to the builder was empty or null.");
-
-        foreach (var wall in walls)
-        {
-            BuildWall(wall, _innerWallPrefab);
-            yield return new WaitForSeconds(_mazeConfigBackingField.StepTime);
-        }
-    }
-
-    private void BuildInnerWalls(Wall[] walls)
-    {
-        if (walls == null)
-            throw new NullReferenceException("The walls array provided to the builder was empty or null.");
-
-        foreach (var wall in walls)
-        {
-            BuildWall(wall, _innerWallPrefab);
-        }
-    }
-
-    private void BuildWall(Wall wall, GameObject prefab)
-    {
-        var newWall = Instantiate(prefab, wall.GetPosition(), Quaternion.identity).transform;
-        newWall.localScale = wall.GetScale(_wallThickness, _wallHeight); 
-        newWall.parent = _mazeParent;
+        _buildRoutine = StartCoroutine(_mazeBuilder.BuildInnerWallsRoutine(MazeGenerator.Generate(vector2Int)));
     }
     
     private void OnDrawGizmos()
