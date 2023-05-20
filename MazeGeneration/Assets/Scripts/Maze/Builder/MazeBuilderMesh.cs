@@ -19,6 +19,7 @@ namespace Maze.Builder
 
         public void BuildOuterWalls()
         {
+            BuildFloor();
             var outerWalls = new Wall[]
             {
                 new Wall(new Vector2Int(0, 0), new Vector2Int(_mazeConfig.Size.x, 0), true),
@@ -55,11 +56,20 @@ namespace Maze.Builder
             }
         }
 
-        public void BuildWall(Wall wall, GameObject prefab)
+        public void BuildWall(Wall wall, GameObject wallPrefab)
         {
-            var newWall = Object.Instantiate(prefab, wall.GetPosition(), Quaternion.identity).transform;
+            var newWall = Object.Instantiate(wallPrefab, wall.GetPosition(), Quaternion.identity).transform;
             newWall.localScale = wall.GetScale(_mazeConfig.WallThickness, _mazeConfig.WallHeight); 
+            newWall.position += new Vector3(0, _mazeConfig.WallHeight / 2f, 0);
             newWall.parent = _mazeParent;
+        }
+
+        public void BuildFloor()
+        {
+            var mazeSize = new Vector3(_mazeConfig.Size.x, 0, _mazeConfig.Size.y);
+            var floor = Object.Instantiate(_mazeConfig.FloorPrefab, mazeSize / 2f, Quaternion.identity).transform;
+            floor.localScale = mazeSize; 
+            floor.parent = _mazeParent;
         }
     }
 }

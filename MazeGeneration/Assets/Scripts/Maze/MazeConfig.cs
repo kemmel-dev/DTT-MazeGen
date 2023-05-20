@@ -22,7 +22,8 @@ namespace Maze
         public GameObject InnerWallPrefab;
         [Tooltip("Prefab used for 3D outer walls.")]
         public GameObject OuterWallPrefab;
-
+        [Tooltip("Prefab used for 3D floor")] 
+        public GameObject FloorPrefab;
         [Tooltip("Material used for lines to draw inner walls in 2d view")]
         public Material InnerWallLineMaterial;
         [Tooltip("Material used for lines to draw outer walls in 2d view")]
