@@ -35,7 +35,7 @@ namespace UI
             var mazeConfig = _mazeBuilder.GetComponent<MazeConfig>();
             mazeConfig.StepTime = _stepTimeSlider.value;
             mazeConfig.Size = new Vector2Int(X, Y);
-            _mazeBuilder.BuildMaze(mazeConfig.StepTime == 0);
+            _mazeBuilder.Build2DMaze(mazeConfig.StepTime == 0);
         }
 
         public bool ValidInput => X > 0 && Y > 0;

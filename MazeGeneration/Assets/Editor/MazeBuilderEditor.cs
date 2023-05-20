@@ -14,7 +14,7 @@ namespace Editor
 
             if (GUILayout.Button("Build maze"))
             {
-                mazeBuilder.BuildMaze(true);
+                mazeBuilder.Build2DMaze(true);
             }
         }
     }

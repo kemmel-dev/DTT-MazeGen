@@ -62,17 +62,22 @@ namespace Maze.Builder
             _mazeParent = new GameObject("Maze Parent").transform;
             _mazeParent.parent = transform;
         }
+        
+        public void Build3DMaze()
+        {
+            BuildMaze(MazeConfig.Size, true, true);
+        }
 
-        public void BuildMaze(bool instant)
+        public void Build2DMaze(bool instant)
         {
             BuildMaze(MazeConfig.Size, instant);
         }
 
-        private void BuildMaze(Vector2Int vector2Int, bool instant)
+        private void BuildMaze(Vector2Int vector2Int, bool instant, bool buildIn3D = false)
         {
             RefreshParent();
 
-            _mazeBuilder = new MazeBuilderLines(_mazeParent, MazeConfig);
+            _mazeBuilder =  buildIn3D ? new MazeBuilderMesh(_mazeParent, MazeConfig) : new MazeBuilderLines(_mazeParent, MazeConfig);
             _mazeBuilder.BuildOuterWalls();
 
             if (_buildRoutine != null)
