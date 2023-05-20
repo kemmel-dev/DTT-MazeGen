@@ -16,9 +16,8 @@ namespace UI
         {
             _scalePercentage = Mathf.Clamp01(_scalePercentage + (Minimised ? -_scaleSpeed : _scaleSpeed) * Time.deltaTime);
             transform.localScale = _scaleMinimised.localScale + ScaleDelta * _scalePercentage;
-
         
-            if (Minimised && _scalePercentage < .0125f)
+            if ( Minimised && gameObject.activeSelf && _scalePercentage < .0125f)
             {
                 gameObject.SetActive(false);
             }
