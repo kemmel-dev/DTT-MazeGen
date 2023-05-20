@@ -11,9 +11,13 @@ namespace CameraTools
         public void Rescale() 
         {
             var cameraTransform = _mainCamera.transform;
+            _mainCamera.orthographic = true;
+
+            cameraTransform.parent = null;
+            cameraTransform.eulerAngles = new Vector3(90, 0, 0);
         
             // Set position to center of the maze.
-            var targetPos = new Vector3(_mazeConfig.Size.x / 2f, cameraTransform.position.y, _mazeConfig.Size.y / 2f);
+            var targetPos = new Vector3(_mazeConfig.Size.x / 2f, 5, _mazeConfig.Size.y / 2f);
             cameraTransform.position = targetPos;
         
             // Set orthographic size to the largest size parameter, taking the horizontal aspect ratio into account.
