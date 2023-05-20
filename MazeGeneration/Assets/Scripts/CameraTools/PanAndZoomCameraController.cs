@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Camera
+namespace CameraTools
 {
     public class PanAndZoomCameraController : MonoBehaviour
     {

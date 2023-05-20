@@ -1,7 +1,7 @@
 using Maze;
 using UnityEngine;
 
-namespace Camera
+namespace CameraTools
 {
     public class CameraScaler : MonoBehaviour
     {
