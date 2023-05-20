@@ -23550,6 +23550,8 @@ MonoBehaviour:
     type: 3}
   OuterWallPrefab: {fileID: 807317065490130066, guid: e57999d49c193cb44aedcd3b1678d75f,
     type: 3}
+  FloorPrefab: {fileID: 956592342974810414, guid: 14a9e57cb3015814097dfe1c8b777cb2,
+    type: 3}
   InnerWallLineMaterial: {fileID: 2100000, guid: 0c78aa306b4d05640b52be9eada224e7,
     type: 2}
   OuterWallLineMaterial: {fileID: 2100000, guid: a971cd158d1404b45b00e0c1aca606ef,
@@ -23600,6 +23602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07041828120ff774c81841ba78331473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ghostObject: {fileID: 1384686613}
   _player: {fileID: 1838898087}
   _mazeBuilder: {fileID: 1050708175}
   _mazeContentsEditor: {fileID: 1050708178}
