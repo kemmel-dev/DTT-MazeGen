@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Camera;
+using UnityEditor;
 using UnityEngine;
 
 namespace Editor

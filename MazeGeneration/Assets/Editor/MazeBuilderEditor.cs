@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Maze.Builder;
+using UnityEditor;
 using UnityEngine;
 
 namespace Editor
