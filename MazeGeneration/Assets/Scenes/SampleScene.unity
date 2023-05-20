@@ -22292,7 +22292,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1014434090}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1050708178}
+        m_TargetAssemblyTypeName: Maze.ContentsEditor.MazeContentsEditor, Assembly-CSharp
+        m_MethodName: PickStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1014434090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23324,6 +23336,7 @@ GameObject:
   - component: {fileID: 1050708175}
   - component: {fileID: 1050708177}
   - component: {fileID: 1050708174}
+  - component: {fileID: 1050708178}
   m_Layer: 0
   m_Name: Maze Generation
   m_TagString: Untagged
@@ -23413,6 +23426,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 330585545}
   _mazeConfig: {fileID: 1050708176}
+--- !u!114 &1050708178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050708172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91427eb91e894fee8e6b24d43fe94ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mazeBuilder: {fileID: 1050708175}
+  _startPrefab: {fileID: 1017095486271515784, guid: 1d1ca0da075e9ea47be3f8cf0d7d0402,
+    type: 3}
+  _finishPrefab: {fileID: 657178423087099020, guid: 2aaa652610b75774fa58466078ad3f9d,
+    type: 3}
+  _keyPrefab: {fileID: 3309673132903076281, guid: 3d0cd931e3b33394c9cb1a46d4a867ff,
+    type: 3}
+  _ghostObject: {fileID: 1384686613}
 --- !u!1 &1051049604
 GameObject:
   m_ObjectHideFlags: 0
@@ -32485,6 +32518,50 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &1384686611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384686612}
+  - component: {fileID: 1384686613}
+  m_Layer: 0
+  m_Name: GhostObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1384686612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384686611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1384686613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384686611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8085dd39ead846fe94833c7b5224b09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1387511126
 GameObject:
   m_ObjectHideFlags: 0
@@ -39820,7 +39897,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1711486514}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1050708178}
+        m_TargetAssemblyTypeName: Maze.ContentsEditor.MazeContentsEditor, Assembly-CSharp
+        m_MethodName: PickFinish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1711486514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45952,7 +46041,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1983677670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1050708178}
+        m_TargetAssemblyTypeName: Maze.ContentsEditor.MazeContentsEditor, Assembly-CSharp
+        m_MethodName: PickKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1983677670
 MonoBehaviour:
   m_ObjectHideFlags: 0
