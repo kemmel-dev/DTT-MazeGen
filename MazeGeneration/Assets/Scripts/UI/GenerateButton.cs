@@ -1,5 +1,6 @@
 ﻿using Maze;
 using Maze.Builder;
+using Maze.ContentsEditor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _buttonText;
 
         [SerializeField] private MazeBuilder _mazeBuilder;
+        [SerializeField] private MazeConfig _mazeConfig;
 
         [SerializeField] private TMP_InputField _inputFieldX; 
         [SerializeField] private TMP_InputField _inputFieldY;
@@ -38,7 +40,15 @@ namespace UI
             _mazeBuilder.Build2DMaze(mazeConfig.StepTime == 0);
         }
 
-        public bool ValidInput => X > 0 && Y > 0;
+        public bool ValidInput
+        {
+            get
+            {
+                var x = X;
+                var y = Y;
+                return x >= _mazeConfig.SizeMin.x && y >= _mazeConfig.SizeMin.y && x <= _mazeConfig.SizeMax.x && y <= _mazeConfig.SizeMax.y;
+            }
+        }
 
         public int X
         {
