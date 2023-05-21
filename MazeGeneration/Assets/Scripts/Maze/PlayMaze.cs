@@ -1,8 +1,10 @@
+using System;
 using Character;
 using Ghost;
 using Maze.Builder;
 using Maze.ContentsEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Maze
 {
@@ -14,6 +16,13 @@ namespace Maze
         [SerializeField] private MazeBuilder _mazeBuilder;
         [SerializeField] private MazeContentsEditor _mazeContentsEditor;
 
+        [SerializeField] private GameObject _generationUI;
+        [SerializeField] private GameObject _editorUI;
+        [SerializeField] private GameObject _restartUI;
+        [SerializeField] private GameObject _hintUI;
+
+        private bool _startedPlaying;
+        
         public void StartPlaying()
         {
             var start = _mazeContentsEditor.Start.position;
@@ -21,6 +30,20 @@ namespace Maze
             _ghostObject.ChangeObject(null);
             _mazeBuilder.Build3DMaze();
             _player.InitializePlayer(start);
+            _mazeContentsEditor.enabled = false;
+            _generationUI.SetActive(false);
+            _editorUI.SetActive(false);
+            _restartUI.SetActive(true);
+            _hintUI.SetActive(false);
+            _startedPlaying = true;
+        }
+
+        private void Update()
+        {
+            if (_startedPlaying && Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }
