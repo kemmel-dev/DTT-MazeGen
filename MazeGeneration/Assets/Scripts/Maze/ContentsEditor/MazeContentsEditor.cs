@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ghost;
 using Maze.Builder;
 using UnityEngine;
@@ -17,7 +18,8 @@ namespace Maze.ContentsEditor
 
         public Transform Start { get; private set; }
         public Transform Finish { get; private set; }
-        public Transform Key { get; private set; }
+        public List<Transform> Keys { get; private set; } = new ();
+        public bool AllPlaced => Start != null && Finish != null && Keys.Count > 0;
         
         private Camera _cam;
 
@@ -67,18 +69,15 @@ namespace Maze.ContentsEditor
                 case MazeObject.Start:
                     if (Start != null)
                         Destroy(Start.gameObject);
-                    Start = Instantiate(_startPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent)
-                        .transform;
+                    Start = Instantiate(_startPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Finish:
                     if (Finish != null)
                         Destroy(Finish.gameObject);
-                    Finish = Instantiate(_finishPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent)
-                        .transform;
+                    Finish = Instantiate(_finishPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Key:
-                    Key = Instantiate(_keyPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent)
-                        .transform;
+                    Keys.Add(Instantiate(_keyPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
