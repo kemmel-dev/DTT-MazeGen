@@ -1531,8 +1531,6 @@ GameObject:
   m_Component:
   - component: {fileID: 75191837}
   - component: {fileID: 75191839}
-  - component: {fileID: 75191838}
-  - component: {fileID: 75191840}
   m_Layer: 5
   m_Name: Go Button
   m_TagString: Untagged
@@ -1561,36 +1559,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &75191838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75191836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.7647059, g: 0.7019608, b: 0.8000001, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &75191839
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1599,18 +1567,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75191836}
   m_CullTransparentMesh: 1
---- !u!114 &75191840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75191836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5fc294b8380e6479d1309b041d1c50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &83181941
 GameObject:
   m_ObjectHideFlags: 0
@@ -13711,6 +13667,7 @@ GameObject:
   - component: {fileID: 611289502}
   - component: {fileID: 611289501}
   - component: {fileID: 611289500}
+  - component: {fileID: 611289503}
   m_Layer: 5
   m_Name: 'Button '
   m_TagString: Untagged
@@ -13833,6 +13790,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611289497}
   m_CullTransparentMesh: 1
+--- !u!114 &611289503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611289497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5fc294b8380e6479d1309b041d1c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &616386536
 GameObject:
   m_ObjectHideFlags: 0
@@ -23595,6 +23564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91427eb91e894fee8e6b24d43fe94ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goButton: {fileID: 611289503}
   _mazeBuilder: {fileID: 1050708175}
   _startPrefab: {fileID: 1017095486271515784, guid: 1d1ca0da075e9ea47be3f8cf0d7d0402,
     type: 3}
