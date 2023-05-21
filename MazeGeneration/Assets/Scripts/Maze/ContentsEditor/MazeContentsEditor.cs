@@ -10,6 +10,7 @@ namespace Maze.ContentsEditor
     public class MazeContentsEditor : MonoBehaviour
     {
 
+        [SerializeField] private GoButton _goButton;
         [SerializeField] private MazeBuilder _mazeBuilder;
         [SerializeField] private GameObject _startPrefab;
         [SerializeField] private GameObject _finishPrefab;
@@ -82,6 +83,7 @@ namespace Maze.ContentsEditor
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            _goButton.RefreshEnabled(AllPlaced);
         }
 
         public void PickStart()
