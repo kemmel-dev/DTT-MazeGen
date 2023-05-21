@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Maze.Generation;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Maze.Builder
 {
@@ -15,6 +17,7 @@ namespace Maze.Builder
         // Access these components only through their properties, so they work from EditMode.
         private MazeConfig _mazeConfigBackingField;
         private MazeGenerator _mazeGeneratorBackingField;
+
         private MazeConfig MazeConfig
         {
             get
@@ -57,6 +60,13 @@ namespace Maze.Builder
             GenerateParent();
         }
 
+        public void PlaceObjects(Vector3 startPos, Vector3 endPos, Vector3 keyPosition)
+        {
+            Instantiate(MazeConfig.StartPrefab, startPos, Quaternion.identity, _mazeParent);
+            Instantiate(MazeConfig.FinishPrefab, endPos, Quaternion.identity, _mazeParent);
+            Instantiate(MazeConfig.KeyPrefab, keyPosition, Quaternion.identity, _mazeParent);
+        }
+
         private void GenerateParent()
         {
             _mazeParent = new GameObject("Maze Parent").transform;
@@ -65,15 +75,15 @@ namespace Maze.Builder
         
         public void Build3DMaze()
         {
-            BuildMaze(MazeConfig.Size, true, true);
+            BuildMaze(MazeConfig.Size, true, true, false);
         }
 
         public void Build2DMaze(bool instant)
         {
-            BuildMaze(MazeConfig.Size, instant);
+            BuildMaze(MazeConfig.Size, instant, false, true);
         }
 
-        private void BuildMaze(Vector2Int vector2Int, bool instant, bool buildIn3D = false)
+        private void BuildMaze(Vector2Int vector2Int, bool instant, bool buildIn3D = false, bool newMaze = false)
         {
             RefreshParent();
 
@@ -83,7 +93,8 @@ namespace Maze.Builder
             if (_buildRoutine != null)
                 StopCoroutine(_buildRoutine);
         
-            _walls = MazeGenerator.Generate(vector2Int);
+            if (newMaze)
+                _walls = MazeGenerator.Generate(vector2Int);
             if (instant)
             {
                 _mazeBuilder.BuildInnerWalls(_walls);

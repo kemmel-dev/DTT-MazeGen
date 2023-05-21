@@ -12,15 +12,15 @@ namespace Maze.ContentsEditor
 
         [SerializeField] private GoButton _goButton;
         [SerializeField] private MazeBuilder _mazeBuilder;
-        [SerializeField] private GameObject _startPrefab;
-        [SerializeField] private GameObject _finishPrefab;
-        [SerializeField] private GameObject _keyPrefab;
+        [SerializeField] private GameObject _startGhostPrefab;
+        [SerializeField] private GameObject _finishGhostPrefab;
+        [SerializeField] private GameObject _keyGhostPrefab;
         [SerializeField] private GhostObject _ghostObject;
 
         public Transform Start { get; private set; }
         public Transform Finish { get; private set; }
-        public List<Transform> Keys { get; private set; } = new ();
-        public bool AllPlaced => Start != null && Finish != null && Keys.Count > 0;
+        public Transform Key { get; private set; }
+        public bool AllPlaced => Start != null && Finish != null && Key != null;
         
         private Camera _cam;
 
@@ -35,6 +35,7 @@ namespace Maze.ContentsEditor
                 return worldPointUnderMouse;
             }
         }
+
 
         private void Awake()
         {
@@ -70,15 +71,17 @@ namespace Maze.ContentsEditor
                 case MazeObject.Start:
                     if (Start != null)
                         Destroy(Start.gameObject);
-                    Start = Instantiate(_startPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
+                    Start = Instantiate(_startGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Finish:
                     if (Finish != null)
                         Destroy(Finish.gameObject);
-                    Finish = Instantiate(_finishPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
+                    Finish = Instantiate(_finishGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Key:
-                    Keys.Add(Instantiate(_keyPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform);
+                    if (Key != null)
+                        Destroy(Finish.gameObject);
+                    Key = Instantiate(_keyGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -88,17 +91,17 @@ namespace Maze.ContentsEditor
 
         public void PickStart()
         {
-            PickPrefab(MazeObject.Start, _startPrefab);
+            PickPrefab(MazeObject.Start, _startGhostPrefab);
         }
 
         public void PickFinish()
         {
-            PickPrefab(MazeObject.Finish, _finishPrefab);
+            PickPrefab(MazeObject.Finish, _finishGhostPrefab);
         }
 
         public void PickKey()
         {
-            PickPrefab(MazeObject.Key, _keyPrefab);
+            PickPrefab(MazeObject.Key, _keyGhostPrefab);
         }
 
         private void PickPrefab(MazeObject objectType, GameObject prefab) 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Character
 {
@@ -9,6 +11,8 @@ namespace Character
         [SerializeField] private Transform _cameraTemplate;
 
         [SerializeField] private FirstPersonCamera _firstPersonCamera;
+
+        private bool _keyCollected = false;
 
         private void Awake()
         {
@@ -24,6 +28,19 @@ namespace Character
             _camera.transform.parent = thisTransform;
             _camera.transform.SetPositionAndRotation(_cameraTemplate.position, _cameraTemplate.rotation);
             _camera.orthographic = false;
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Key"))
+            {
+                Destroy(other.gameObject);
+                _keyCollected = true;
+            }
+            else if (other.CompareTag("Finish") && _keyCollected)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }

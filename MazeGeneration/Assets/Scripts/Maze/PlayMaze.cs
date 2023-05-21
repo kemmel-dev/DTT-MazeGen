@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Character;
 using Ghost;
 using Maze.Builder;
@@ -20,15 +21,17 @@ namespace Maze
         [SerializeField] private GameObject _editorUI;
         [SerializeField] private GameObject _restartUI;
         [SerializeField] private GameObject _hintUI;
-
+        
         private bool _startedPlaying;
         
         public void StartPlaying()
         {
             var start = _mazeContentsEditor.Start.position;
             var finish = _mazeContentsEditor.Finish.position;
+            var key = _mazeContentsEditor.Key.position;
             _ghostObject.ChangeObject(null);
             _mazeBuilder.Build3DMaze();
+            _mazeBuilder.PlaceObjects(start, finish, key);
             _player.InitializePlayer(start);
             _mazeContentsEditor.enabled = false;
             _generationUI.SetActive(false);
@@ -36,6 +39,7 @@ namespace Maze
             _restartUI.SetActive(true);
             _hintUI.SetActive(false);
             _startedPlaying = true;
+            
         }
 
         private void Update()

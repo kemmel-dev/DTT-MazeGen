@@ -23773,6 +23773,12 @@ MonoBehaviour:
     type: 2}
   OuterWallLineMaterial: {fileID: 2100000, guid: a971cd158d1404b45b00e0c1aca606ef,
     type: 2}
+  StartPrefab: {fileID: 1017095486271515784, guid: 7b2d74adf756895448f2a54e16dbc919,
+    type: 3}
+  FinishPrefab: {fileID: 657178423087099020, guid: 6366c2d3d76776343aefe50e1daf3859,
+    type: 3}
+  KeyPrefab: {fileID: 3309673132903076281, guid: baf335992e5df9c40a52903e4469ab95,
+    type: 3}
 --- !u!114 &1050708177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23801,11 +23807,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goButton: {fileID: 611289503}
   _mazeBuilder: {fileID: 1050708175}
-  _startPrefab: {fileID: 1017095486271515784, guid: 1d1ca0da075e9ea47be3f8cf0d7d0402,
+  _startGhostPrefab: {fileID: 1017095486271515784, guid: 1d1ca0da075e9ea47be3f8cf0d7d0402,
     type: 3}
-  _finishPrefab: {fileID: 657178423087099020, guid: 2aaa652610b75774fa58466078ad3f9d,
+  _finishGhostPrefab: {fileID: 657178423087099020, guid: 2aaa652610b75774fa58466078ad3f9d,
     type: 3}
-  _keyPrefab: {fileID: 3309673132903076281, guid: 3d0cd931e3b33394c9cb1a46d4a867ff,
+  _keyGhostPrefab: {fileID: 3309673132903076281, guid: 3d0cd931e3b33394c9cb1a46d4a867ff,
     type: 3}
   _ghostObject: {fileID: 1384686613}
 --- !u!114 &1050708179

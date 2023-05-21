@@ -28,5 +28,12 @@ namespace Maze
         public Material InnerWallLineMaterial;
         [Tooltip("Material used for lines to draw outer walls in 2d view")]
         public Material OuterWallLineMaterial;
+
+        [Tooltip("Prefab used for the non-ghost start object.")]
+        public GameObject StartPrefab;
+        [Tooltip("Prefab used for the non-ghost finish object.")]
+        public GameObject FinishPrefab;
+        [Tooltip("Prefab used for the non-ghost key object.")]
+        public GameObject KeyPrefab;
     }
 }
