@@ -23752,8 +23752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59aa25c31e8c0eb44a064f226610bf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 330585545}
-  _mazeConfig: {fileID: 1050708176}
 --- !u!114 &1050708178
 MonoBehaviour:
   m_ObjectHideFlags: 0

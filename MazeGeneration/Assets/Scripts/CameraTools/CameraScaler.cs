@@ -1,3 +1,4 @@
+using System;
 using Maze;
 using UnityEngine;
 
@@ -5,8 +6,15 @@ namespace CameraTools
 {
     public class CameraScaler : MonoBehaviour
     {
-        [SerializeField] private UnityEngine.Camera _mainCamera;
-        [SerializeField] private MazeConfig _mazeConfig;
+        private MazeConfig _mazeConfig;
+
+        private Camera _mainCamera;
+
+        private void Awake()
+        {
+            _mainCamera = Camera.main; 
+            _mazeConfig = MazeConfig.Instance;
+        }
 
         public void Rescale() 
         {
