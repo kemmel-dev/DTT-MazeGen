@@ -111,7 +111,6 @@ namespace Maze.Content
         {
             _currentObjectType = MazeObject.None;
             _ghostObject.ChangeObject(null);
-            _ghostObject.GhostVisible = false;
         }
     }
 }
