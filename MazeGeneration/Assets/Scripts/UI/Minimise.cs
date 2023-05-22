@@ -8,9 +8,9 @@ namespace UI
         [SerializeField] private Transform _scaleMaximised;
         [SerializeField] private float _scaleSpeed;
         private Vector3 ScaleDelta => _scaleMaximised.localScale - _scaleMinimised.localScale;
-        public bool Minimised { get; set; }
-
         private float _scalePercentage = 1f;
+        
+        public bool Minimised { get; set; }
 
         private void Update()
         {
@@ -22,11 +22,5 @@ namespace UI
                 gameObject.SetActive(false);
             }
         }
-
-        public void ToggleMinimized()
-        {
-            Minimised = !Minimised;
-        }
-    
     }
 }
