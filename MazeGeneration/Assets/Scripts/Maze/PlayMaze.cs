@@ -1,9 +1,7 @@
-using System;
-using System.Linq;
 using Character;
 using Ghost;
 using Maze.Builder;
-using Maze.ContentsEditor;
+using Maze.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +13,7 @@ namespace Maze
         [SerializeField] private GhostObject _ghostObject;
         [SerializeField] private Player _player;
         [SerializeField] private MazeBuilder _mazeBuilder;
-        [SerializeField] private MazeContentsEditor _mazeContentsEditor;
+        [SerializeField] private AlterMazeContents _alterMazeContents;
 
         [SerializeField] private GameObject _generationUI;
         [SerializeField] private GameObject _editorUI;
@@ -26,14 +24,14 @@ namespace Maze
         
         public void StartPlaying()
         {
-            var start = _mazeContentsEditor.Start.position;
-            var finish = _mazeContentsEditor.Finish.position;
-            var key = _mazeContentsEditor.Key.position;
+            var start = _alterMazeContents.Start.position;
+            var finish = _alterMazeContents.Finish.position;
+            var key = _alterMazeContents.Key.position;
             _ghostObject.ChangeObject(null);
             _mazeBuilder.Build3DMaze();
             _mazeBuilder.PlaceObjects(start, finish, key);
             _player.InitializePlayer(start);
-            _mazeContentsEditor.enabled = false;
+            _alterMazeContents.enabled = false;
             _generationUI.SetActive(false);
             _editorUI.SetActive(false);
             _restartUI.SetActive(true);

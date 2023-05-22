@@ -1,3 +1,4 @@
+using Maze.Builder;
 using Maze.Generation;
 using UnityEngine;
 
@@ -31,7 +32,15 @@ namespace Maze
         public Material InnerWallLineMaterial;
         [Tooltip("Material used for lines to draw outer walls in 2d view")]
         public Material OuterWallLineMaterial;
-
+        
+        [Header("Prefabs used for ghosts objects.")]
+        [Tooltip("Prefab used for the ghost start object.")]
+        public GameObject StartGhostPrefab;
+        [Tooltip("Prefab used for the ghost finish object.")]
+        public GameObject FinishGhostPrefab;
+        [Tooltip("Prefab used for the ghost key object.")]
+        public GameObject KeyGhostPrefab;
+        [Header("Prefabs used for actual objects.")]
         [Tooltip("Prefab used for the non-ghost start object.")]
         public GameObject StartPrefab;
         [Tooltip("Prefab used for the non-ghost finish object.")]
@@ -41,18 +50,30 @@ namespace Maze
 
         public static MazeConfig Instance { get; private set; }
         
-        private MazeGenerator _mazeGeneratorBackingField;
+        private MazeGenerator b_mazeGenerator;
         
         public MazeGenerator MazeGenerator
         {
             get
             {
-                if (_mazeGeneratorBackingField != null) return _mazeGeneratorBackingField;
-                _mazeGeneratorBackingField = GetComponent<MazeGenerator>();
-                return _mazeGeneratorBackingField;
+                if (b_mazeGenerator != null) return b_mazeGenerator;
+                b_mazeGenerator = GetComponent<MazeGenerator>();
+                return b_mazeGenerator;
             }
         }
+        
+        // Access these components only through their properties, so they work from EditMode.
+        private MazeBuilder b_mazeBuilder;
 
+        public MazeBuilder MazeBuilder
+        {
+            get
+            {
+                if (b_mazeBuilder != null) return b_mazeBuilder;
+                b_mazeBuilder = GetComponent<MazeBuilder>();
+                return b_mazeBuilder;
+            }
+        }
 
         private void Awake()
         {

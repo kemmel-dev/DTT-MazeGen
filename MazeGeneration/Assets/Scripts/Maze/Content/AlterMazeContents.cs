@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ghost;
-using Maze.Builder;
+using Maze.ContentsEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Maze.ContentsEditor
+namespace Maze.Content
 {
-    public class MazeContentsEditor : MonoBehaviour
+    [RequireComponent(typeof(MazeConfig))]
+    public class AlterMazeContents : MonoBehaviour
     {
-
         [SerializeField] private GoButton _goButton;
-        [SerializeField] private MazeBuilder _mazeBuilder;
-        [SerializeField] private GameObject _startGhostPrefab;
-        [SerializeField] private GameObject _finishGhostPrefab;
-        [SerializeField] private GameObject _keyGhostPrefab;
         [SerializeField] private GhostObject _ghostObject;
 
+        private MazeConfig _mazeConfig;
+        private Camera _cam;
+        private MazeObject _currentObjectType = MazeObject.None;
+        
         public Transform Start { get; private set; }
         public Transform Finish { get; private set; }
         public Transform Key { get; private set; }
-        public bool AllPlaced => Start != null && Finish != null && Key != null;
-        
-        private Camera _cam;
-
-        private MazeObject _currentObjectType = MazeObject.None;
         private bool ActiveSelection => _currentObjectType != MazeObject.None;
+        private bool AllPlaced => Start != null && Finish != null && Key != null;
+
         private Vector3 WorldPointUnderMouse
         {
             get
@@ -40,6 +36,7 @@ namespace Maze.ContentsEditor
         private void Awake()
         {
             _cam = Camera.main;
+            _mazeConfig = MazeConfig.Instance;
         }
 
         private void Update()
@@ -60,7 +57,7 @@ namespace Maze.ContentsEditor
 
         private void PlaceSelection()
         {
-            var mazeParent = _mazeBuilder.transform.GetChild(0);
+            var mazeParent = _mazeConfig.MazeBuilder.transform.GetChild(0);
             if (mazeParent == null)
                 throw new NullReferenceException("Tried placing an object but there was no maze!");
             
@@ -71,17 +68,17 @@ namespace Maze.ContentsEditor
                 case MazeObject.Start:
                     if (Start != null)
                         Destroy(Start.gameObject);
-                    Start = Instantiate(_startGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
+                    Start = Instantiate(_mazeConfig.StartGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Finish:
                     if (Finish != null)
                         Destroy(Finish.gameObject);
-                    Finish = Instantiate(_finishGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
+                    Finish = Instantiate(_mazeConfig.FinishGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 case MazeObject.Key:
                     if (Key != null)
                         Destroy(Finish.gameObject);
-                    Key = Instantiate(_keyGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
+                    Key = Instantiate(_mazeConfig.KeyGhostPrefab, WorldPointUnderMouse, Quaternion.identity, mazeParent).transform;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -91,17 +88,17 @@ namespace Maze.ContentsEditor
 
         public void PickStart()
         {
-            PickPrefab(MazeObject.Start, _startGhostPrefab);
+            PickPrefab(MazeObject.Start, _mazeConfig.StartGhostPrefab);
         }
 
         public void PickFinish()
         {
-            PickPrefab(MazeObject.Finish, _finishGhostPrefab);
+            PickPrefab(MazeObject.Finish, _mazeConfig.FinishGhostPrefab);
         }
 
         public void PickKey()
         {
-            PickPrefab(MazeObject.Key, _keyGhostPrefab);
+            PickPrefab(MazeObject.Key, _mazeConfig.KeyGhostPrefab);
         }
 
         private void PickPrefab(MazeObject objectType, GameObject prefab) 
@@ -110,7 +107,7 @@ namespace Maze.ContentsEditor
             _ghostObject.ChangeObject(prefab);
         }
 
-        public void ClearSelection()
+        private void ClearSelection()
         {
             _currentObjectType = MazeObject.None;
             _ghostObject.ChangeObject(null);
