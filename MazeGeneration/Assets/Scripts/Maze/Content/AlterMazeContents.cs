@@ -102,7 +102,7 @@ namespace Maze.Content
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            _goButton.RefreshEnabled(AllPlaced);
+            _goButton.Interactable = AllPlaced;
         }
 
         /// <summary>

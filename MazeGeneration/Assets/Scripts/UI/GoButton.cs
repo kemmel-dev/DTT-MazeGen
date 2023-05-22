@@ -14,9 +14,10 @@ namespace UI
             _button.interactable = false;
         }
 
-        public void RefreshEnabled(bool allPlaced)
-        {
-            _button.interactable = allPlaced;
+        public bool Interactable
+        { 
+            set => _button.interactable = value;
         }
+
     }
 }
