@@ -1,5 +1,5 @@
-﻿using Maze;
-using Maze.Builder;
+﻿using System;
+using Maze;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +12,17 @@ namespace UI
         [SerializeField] private Slider _stepTimeSlider;
         [SerializeField] private Button _button;
         [SerializeField] private TextMeshProUGUI _buttonText;
-
-        [SerializeField] private MazeBuilder _mazeBuilder;
-        [SerializeField] private MazeConfig _mazeConfig;
-
         [SerializeField] private TMP_InputField _inputFieldX; 
         [SerializeField] private TMP_InputField _inputFieldY;
-
         [SerializeField] private Color _textColorEnabled;
         [SerializeField] private Color _textColorDisabled;
+        
+        private MazeConfig _mazeConfig;
+
+        private void Awake()
+        {
+            _mazeConfig = MazeConfig.Instance;
+        }
 
         private void Update()
         {
@@ -33,10 +35,10 @@ namespace UI
         {
             if (!ValidInput) return;
         
-            var mazeConfig = _mazeBuilder.GetComponent<MazeConfig>();
+            var mazeConfig = _mazeConfig.MazeBuilder.GetComponent<MazeConfig>();
             mazeConfig.StepTime = _stepTimeSlider.value;
             mazeConfig.Size = new Vector2Int(X, Y);
-            _mazeBuilder.Build2DMaze(mazeConfig.StepTime == 0);
+            _mazeConfig.MazeBuilder.Build2DMaze(mazeConfig.StepTime == 0);
         }
 
         public bool ValidInput
