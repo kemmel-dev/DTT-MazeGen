@@ -18,7 +18,6 @@ namespace Character
         {
             _playerMotor.SetMovementInput(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             _firstPersonCamera.AdjustAngle(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
-            
         }
     }
 }
