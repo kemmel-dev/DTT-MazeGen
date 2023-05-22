@@ -9,6 +9,9 @@ namespace UI
 
         private bool _minimized;
 
+        /// <summary>
+        /// Toggles minimisation of the panel.
+        /// </summary>
         public void Toggle()
         {
             _minimized = !_minimized;
