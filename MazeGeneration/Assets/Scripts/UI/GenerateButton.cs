@@ -1,6 +1,5 @@
 ﻿using Maze;
 using Maze.Builder;
-using Maze.ContentsEditor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

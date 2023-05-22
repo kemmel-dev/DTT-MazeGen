@@ -1,4 +1,4 @@
-﻿namespace Maze.ContentsEditor
+﻿namespace Maze.Content
 {
     enum MazeObject
     {

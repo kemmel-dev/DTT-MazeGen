@@ -1,6 +1,5 @@
 ﻿using System;
 using Ghost;
-using Maze.ContentsEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
