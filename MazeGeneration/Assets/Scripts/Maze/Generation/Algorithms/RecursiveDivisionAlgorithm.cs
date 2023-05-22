@@ -10,53 +10,67 @@ namespace Maze.Generation.Algorithms
     
         public Wall[] GenerateWalls(Vector2Int mazeSize)
         {
-            DivideMaze(0, 0, mazeSize.x, mazeSize.y);
+            DivideSection(0, 0, mazeSize.x, mazeSize.y);
             return Walls;
         }
     
-        private void DivideMaze(int startX, int startY, int endX, int endY)
+        /// <summary>
+        /// Divides a section of the maze by placing a random wall with a random gap. 
+        /// </summary>
+        /// <param name="startX">The start bound x of this section of the maze.</param>
+        /// <param name="startY">The start bound y of this section of the maze.</param>
+        /// <param name="endX">The end bound x of this section of the maze.</param>
+        /// <param name="endY">The end bound y of this section of the maze.</param>
+        private void DivideSection(int startX, int startY, int endX, int endY)
         {
+            // Check if section is still large enough.
             var dx = Mathf.Abs(endX - startX);
             var dy = Mathf.Abs(endY - startY);
-        
             if (dx <= 1 || dy <= 1)
                 return;
 
+            // Check whether we should place a horizontal or vertical wall.
             var divideHorizontally = dy >= dx;
         
             if (divideHorizontally)
             {
+                // Pick random y to place the wall, and a random x to place the gap.
                 var y = Random.Range(startY + 1, endY);
                 var gapX = Random.Range(startX, endX);
             
                 // Add wall from region start to gap start
-                AddWall(new Wall(new Vector2Int(startX, y), new Vector2Int(gapX, y), true));
+                AddWallIfExists(new Wall(new Vector2Int(startX, y), new Vector2Int(gapX, y), true));
                 // Add wall from gap end to region end
-                AddWall(new Wall(new Vector2Int(gapX + 1, y), new Vector2Int(endX, y), true));
+                AddWallIfExists(new Wall(new Vector2Int(gapX + 1, y), new Vector2Int(endX, y), true));
             
                 // Divide upper section
-                DivideMaze(startX, startY, endX, y);
+                DivideSection(startX, startY, endX, y);
                 // Divide lower section
-                DivideMaze(startX, y, endX, endY);
+                DivideSection(startX, y, endX, endY);
             }
             else
             {
+                // Pick random x to place the wall, and a random y to place the gap.
                 var x = Random.Range(startX + 1, endX);
                 var gapY = Random.Range(startY, endY);
 
                 // Add wall from region start to gap start
-                AddWall(new Wall(new Vector2Int(x, startY), new Vector2Int(x, gapY), false));
+                AddWallIfExists(new Wall(new Vector2Int(x, startY), new Vector2Int(x, gapY), false));
                 // Add wall from gap end to region end
-                AddWall(new Wall(new Vector2Int(x, gapY + 1), new Vector2Int(x, endY), false));
+                AddWallIfExists(new Wall(new Vector2Int(x, gapY + 1), new Vector2Int(x, endY), false));
             
                 // Divide left section
-                DivideMaze(startX, startY, x, endY); 
+                DivideSection(startX, startY, x, endY); 
                 // Divide right section
-                DivideMaze(x, startY, endX, endY);
+                DivideSection(x, startY, endX, endY);
             }
         }
 
-        private void AddWall(Wall wall)
+        /// <summary>
+        /// Adds a wall to the list (if it's length is over 0)
+        /// </summary>
+        /// <param name="wall">The wall to potentially add to the list.</param>
+        private void AddWallIfExists(Wall wall)
         {
             if (wall.Length > 0)
             {
