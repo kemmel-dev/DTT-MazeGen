@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Maze
 {
+    [DefaultExecutionOrder(0)]
     public class MazeConfig : MonoBehaviour
     {
         [Tooltip("Current size of the maze.")]
@@ -35,5 +36,12 @@ namespace Maze
         public GameObject FinishPrefab;
         [Tooltip("Prefab used for the non-ghost key object.")]
         public GameObject KeyPrefab;
+
+        public static MazeConfig Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
     }
 }
