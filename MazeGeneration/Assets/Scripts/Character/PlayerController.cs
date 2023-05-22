@@ -1,8 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Character
 {
+    [RequireComponent(typeof(PlayerMotor))]
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private FirstPersonCamera _firstPersonCamera;
