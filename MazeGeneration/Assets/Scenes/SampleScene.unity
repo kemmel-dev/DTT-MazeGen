@@ -6680,6 +6680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5fc294b8380e6479d1309b041d1c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 611289500}
 --- !u!1 &649276878
 GameObject:
   m_ObjectHideFlags: 0
@@ -8167,8 +8168,6 @@ MonoBehaviour:
   _stepTimeSlider: {fileID: 2063725849}
   _button: {fileID: 717965770}
   _buttonText: {fileID: 838822736}
-  _mazeBuilder: {fileID: 1050708175}
-  _mazeConfig: {fileID: 1050708176}
   _inputFieldX: {fileID: 1157759824}
   _inputFieldY: {fileID: 255487804}
   _textColorEnabled: {r: 1, g: 1, b: 1, a: 1}
@@ -13526,8 +13525,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ghostObject: {fileID: 1384686613}
   _player: {fileID: 1838898087}
-  _mazeBuilder: {fileID: 1050708175}
-  _alterMazeContents: {fileID: 1050708178}
   _generationUI: {fileID: 204371385}
   _editorUI: {fileID: 1561374412}
   _restartUI: {fileID: 715800453}
