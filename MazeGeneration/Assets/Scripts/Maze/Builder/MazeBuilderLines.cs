@@ -55,6 +55,7 @@ namespace Maze.Builder
 
         private void BuildWall(Wall wall, Material lineMaterial, int layer)
         {
+            // Build wall by drawing a line on a new LineRenderer.
             var newWallRenderer = new GameObject().AddComponent<LineRenderer>();
             newWallRenderer.sortingOrder = layer;
             newWallRenderer.transform.parent = _mazeParent;
