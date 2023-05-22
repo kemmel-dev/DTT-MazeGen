@@ -5,10 +5,12 @@ namespace Character
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMotor : MonoBehaviour
     {
+
+        [SerializeField] private float _speed = 50f;
+        
         private Rigidbody _rigidbody;
         private Vector3 _moveInput;
 
-        public float Speed;
 
         private void Awake()
         {
@@ -26,7 +28,7 @@ namespace Character
             var forward = thisTransform.forward.normalized * (_moveInput.z * Time.deltaTime);
             var right = thisTransform.right.normalized * (_moveInput.x * Time.deltaTime);
 
-            var combined = (forward + right) * Speed;
+            var combined = (forward + right) * _speed;
             combined.y = _rigidbody.velocity.y;
             _rigidbody.velocity = combined;
         }
