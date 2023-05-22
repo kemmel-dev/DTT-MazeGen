@@ -1,4 +1,5 @@
 using Maze.Builder;
+using Maze.Content;
 using Maze.Generation;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Maze
 {
     [DefaultExecutionOrder(0)]
     [RequireComponent(typeof(MazeGenerator))]
+    [RequireComponent(typeof(MazeBuilder))]
     public class MazeConfig : MonoBehaviour
     {
         [Tooltip("Current size of the maze.")]
@@ -72,6 +74,18 @@ namespace Maze
                 if (b_mazeBuilder != null) return b_mazeBuilder;
                 b_mazeBuilder = GetComponent<MazeBuilder>();
                 return b_mazeBuilder;
+            }
+        }
+
+        private AlterMazeContents b_alterMazeContents;
+        
+        public AlterMazeContents AlterMazeContents
+        {
+            get
+            {
+                if (b_alterMazeContents != null) return b_alterMazeContents;
+                b_alterMazeContents = GetComponent<AlterMazeContents>();
+                return b_alterMazeContents;
             }
         }
 
