@@ -11,11 +11,10 @@ namespace Editor
         {
             base.OnInspectorGUI();
 
-            if (GUILayout.Button("Rescale"))
-            {
-                var cameraScale = (CameraScaler)target;
-                cameraScale.Rescale();
-            }
+            if (!GUILayout.Button("Rescale")) return;
+            
+            var cameraScale = (CameraScaler)target;
+            cameraScale.Rescale();
         }
     }
 }
