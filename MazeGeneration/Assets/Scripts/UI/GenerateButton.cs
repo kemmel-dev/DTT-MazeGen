@@ -31,17 +31,26 @@ namespace UI
             _buttonText.color = inputValid ? _textColorEnabled : _textColorDisabled;
         }
 
+        /// <summary>
+        /// Executes required actions when the generate button is clicked.
+        /// </summary>
         public void OnGenerate()
         {
             if (!ValidInput) return;
         
+            // Update maze config.
             var mazeConfig = _mazeConfig.MazeBuilder.GetComponent<MazeConfig>();
             mazeConfig.StepTime = _stepTimeSlider.value;
             mazeConfig.Size = new Vector2Int(X, Y);
+            
+            // Build the 2d maze.
             _mazeConfig.MazeBuilder.Build2DMaze(mazeConfig.StepTime == 0);
         }
 
-        public bool ValidInput
+        /// <summary>
+        /// Returns true if X and Y field contain values that fit in the maze size.
+        /// </summary>
+        private bool ValidInput
         {
             get
             {
@@ -51,7 +60,10 @@ namespace UI
             }
         }
 
-        public int X
+        /// <summary>
+        /// Return the value of the X input field (or -1 if the contents cant be parsed to an int). 
+        /// </summary>
+        private int X
         {
             get
             {
@@ -62,7 +74,10 @@ namespace UI
             }
         }
     
-        public int Y
+        /// <summary>
+        /// Return the value of the Y input field (or -1 if the contents cant be parsed to an int). 
+        /// </summary>
+        private int Y
         {
             get
             {
