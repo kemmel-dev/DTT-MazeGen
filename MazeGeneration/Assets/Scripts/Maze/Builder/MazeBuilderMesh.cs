@@ -59,7 +59,7 @@ namespace Maze.Builder
         private void BuildWall(Wall wall, GameObject wallPrefab)
         {
             // Build wall by positioning and scaling a prefab.
-            var newWall = Object.Instantiate(wallPrefab, wall.GetPosition(), Quaternion.identity).transform;
+            var newWall = Object.Instantiate(wallPrefab, wall.Center, Quaternion.identity).transform;
             newWall.localScale = wall.GetScale(_mazeConfig.WallThickness, _mazeConfig.WallHeight); 
             newWall.position += new Vector3(0, _mazeConfig.WallHeight / 2f, 0);
             newWall.parent = _mazeParent;
