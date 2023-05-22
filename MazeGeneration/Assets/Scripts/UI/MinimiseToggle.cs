@@ -4,8 +4,8 @@ namespace UI
 {
     public class MinimiseToggle : MonoBehaviour
     {
-        public Minimise _objectToMinimise;
-        public GameObject _verticalLineForMaximise;
+        [SerializeField] private Minimise _objectToMinimise;
+        [SerializeField] private GameObject _verticalLineForMaximise;
 
         private bool _minimized;
 
