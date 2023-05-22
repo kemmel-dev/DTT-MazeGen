@@ -7,7 +7,7 @@ namespace Maze
 
         public Vector2Int Start { get; private set; }
         public Vector2Int End { get; private set; }
-        public bool Horizontal { get; }
+        private bool Horizontal { get; }
 
         public int Length => (int) Vector2Int.Distance(Start, End);
 
