@@ -1,6 +1,6 @@
 ﻿namespace Maze.Content
 {
-    enum MazeObject
+    internal enum MazeObject
     {
         None,
         Start,
