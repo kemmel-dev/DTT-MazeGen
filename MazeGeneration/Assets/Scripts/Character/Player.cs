@@ -1,17 +1,14 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Character
 {
     public class Player : MonoBehaviour
     {
-        private Camera _camera;
-        
         [SerializeField] private Transform _cameraTemplate;
-
         [SerializeField] private FirstPersonCamera _firstPersonCamera;
-
+        
+        private Camera _camera;
         private bool _keyCollected = false;
 
         private void Awake()
