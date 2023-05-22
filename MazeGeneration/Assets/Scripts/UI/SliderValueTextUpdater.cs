@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class SliderValueTextUpdater : MonoBehaviour
     {
         [SerializeField] private Slider _slider;
