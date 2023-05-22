@@ -1,4 +1,3 @@
-using System;
 using Maze;
 using UnityEngine;
 
@@ -7,7 +6,6 @@ namespace CameraTools
     public class CameraScaler : MonoBehaviour
     {
         private MazeConfig _mazeConfig;
-
         private Camera _mainCamera;
 
         private void Awake()
@@ -16,11 +14,15 @@ namespace CameraTools
             _mazeConfig = MazeConfig.Instance;
         }
 
+        /// <summary>
+        /// Rescales the camera to the overhead 2d maze view. 
+        /// </summary>
         public void Rescale() 
         {
             var cameraTransform = _mainCamera.transform;
+            
+            // Set camera settings to those of the 2d view.
             _mainCamera.orthographic = true;
-
             cameraTransform.parent = null;
             cameraTransform.eulerAngles = new Vector3(90, 0, 0);
         
