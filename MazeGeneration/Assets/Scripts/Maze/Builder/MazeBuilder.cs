@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Maze.Generation;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Maze.Builder
 {
-    [RequireComponent(typeof(MazeGenerator))]
+    [RequireComponent(typeof(MazeConfig))]
     public class MazeBuilder : MonoBehaviour
     {
         private Wall[] _walls = Array.Empty<Wall>();
@@ -16,7 +14,6 @@ namespace Maze.Builder
     
         // Access these components only through their properties, so they work from EditMode.
         private MazeConfig _mazeConfigBackingField;
-        private MazeGenerator _mazeGeneratorBackingField;
 
         private MazeConfig MazeConfig
         {
@@ -25,19 +22,9 @@ namespace Maze.Builder
                 if (_mazeConfigBackingField != null) return _mazeConfigBackingField;
                 _mazeConfigBackingField = GetComponent<MazeConfig>();
                 return _mazeConfigBackingField;
-
             }
         }
-        private MazeGenerator MazeGenerator
-        {
-            get
-            {
-                if (_mazeGeneratorBackingField != null) return _mazeGeneratorBackingField;
-                _mazeGeneratorBackingField = GetComponent<MazeGenerator>();
-                return _mazeGeneratorBackingField;
-
-            }
-        }
+        
     
         private void Awake()
         {
@@ -94,7 +81,7 @@ namespace Maze.Builder
                 StopCoroutine(_buildRoutine);
         
             if (newMaze)
-                _walls = MazeGenerator.Generate(vector2Int);
+                _walls = MazeConfig.MazeGenerator.Generate(vector2Int);
             if (instant)
             {
                 _mazeBuilder.BuildInnerWalls(_walls);

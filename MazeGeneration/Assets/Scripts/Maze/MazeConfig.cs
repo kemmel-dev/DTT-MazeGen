@@ -1,8 +1,10 @@
+using Maze.Generation;
 using UnityEngine;
 
 namespace Maze
 {
     [DefaultExecutionOrder(0)]
+    [RequireComponent(typeof(MazeGenerator))]
     public class MazeConfig : MonoBehaviour
     {
         [Tooltip("Current size of the maze.")]
@@ -38,6 +40,19 @@ namespace Maze
         public GameObject KeyPrefab;
 
         public static MazeConfig Instance { get; private set; }
+        
+        private MazeGenerator _mazeGeneratorBackingField;
+        
+        public MazeGenerator MazeGenerator
+        {
+            get
+            {
+                if (_mazeGeneratorBackingField != null) return _mazeGeneratorBackingField;
+                _mazeGeneratorBackingField = GetComponent<MazeGenerator>();
+                return _mazeGeneratorBackingField;
+            }
+        }
+
 
         private void Awake()
         {
