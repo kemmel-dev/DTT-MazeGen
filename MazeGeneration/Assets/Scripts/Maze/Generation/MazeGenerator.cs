@@ -6,8 +6,6 @@ namespace Maze.Generation
 {
     public class MazeGenerator : MonoBehaviour
     {
-        private RecursiveDivisionAlgorithm _recursiveDivisionAlgorithm;
-
         [SerializeField]
         private GenerationAlgorithm _algorithm = GenerationAlgorithm.RecursiveDivision;
 
