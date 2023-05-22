@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoButton : MonoBehaviour
+namespace UI
 {
-
-    private Button _button;
-
-    private void Awake()
+    public class GoButton : MonoBehaviour
     {
-        _button = GetComponent<Button>();
-        _button.interactable = false;
-    }
 
-    public void RefreshEnabled(bool allPlaced)
-    {
-        _button.interactable = allPlaced;
+        [SerializeField]
+        private Button _button;
+
+        private void Awake()
+        {
+            _button.interactable = false;
+        }
+
+        public void RefreshEnabled(bool allPlaced)
+        {
+            _button.interactable = allPlaced;
+        }
     }
 }
