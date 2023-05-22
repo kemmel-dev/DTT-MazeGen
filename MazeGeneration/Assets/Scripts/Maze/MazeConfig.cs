@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Maze
 {
-    [DefaultExecutionOrder(0)]
+    [DefaultExecutionOrder(-1)]
     [RequireComponent(typeof(MazeGenerator))]
     [RequireComponent(typeof(MazeBuilder))]
     public class MazeConfig : MonoBehaviour
