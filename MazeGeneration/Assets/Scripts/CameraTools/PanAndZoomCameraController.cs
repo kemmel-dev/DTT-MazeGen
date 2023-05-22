@@ -8,11 +8,11 @@ namespace CameraTools
         [SerializeField] private float _panSensitivity;
         [SerializeField] private float _zoomSensitivity;
 
-        private UnityEngine.Camera _camera;
+        private Camera _camera;
 
         private void Awake()
         {
-            _camera = GetComponent<UnityEngine.Camera>();
+            _camera = Camera.main;
         }
 
         // Update is called once per frame
